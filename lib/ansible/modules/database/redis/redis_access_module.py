@@ -100,6 +100,9 @@ def init_redis_client(host='localhost', port=6379, db=0):
     return redis.Redis(host=host, port=port, db=db)
 
 def run_module():
+    if not redis_found:
+        module.fail_json(msg="the python redis module is required")
+
     # define available arguments/parameters a user can pass to the module
     module_args = dict(
         port=dict(type='str', required=False, default='6379'),
@@ -173,8 +176,6 @@ def run_module():
 
 def main():
 
-    if not redis_found:
-        module.fail_json(msg="the python redis module is required")
 
     run_module()
 
