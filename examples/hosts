@@ -16,6 +16,8 @@
 ## 192.168.100.10
 
 # Ex 2: A collection of hosts belonging to the 'webservers' group
+[localhost]
+127.0.0.1 ansible_host=127.0.0.1
 
 ## [webservers]
 ## alpha.example.org

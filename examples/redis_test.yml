@@ -1,0 +1,40 @@
+---
+- hosts: localhost 
+  tasks:
+  - name: Redis write test
+    redis_access_module:
+      mode: set
+      set: "{'asdf': 'asdf',
+             'asdfa': 'asdfa'}"
+    register: out
+  - name: debugout
+    debug:
+      msg: "{{ out }}"
+  - name: Redis read test
+    redis_access_module:
+      mode: get
+      get: 
+        - "asdfa"
+    register: out
+  - name: debugout
+    debug:
+      msg: "{{ out }}"
+  - name: Dump redis 
+    redis_access_module:
+      mode: dump 
+    register: out
+  - name: debugout
+    debug:
+      msg: "{{ out }}"
+  - name: delete some keys 
+    redis_access_module:
+      mode: delete
+      keys: 
+        - asdf
+        - asdfa
+        - a1
+        - a2
+    register: out
+  - name: debugout
+    debug:
+      msg: "{{ out }}"
